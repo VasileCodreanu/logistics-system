@@ -1,48 +1,44 @@
 package com.cedacri.logisticssystem.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Broker {
+public class Sender extends Customer{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    @Embedded
-    private Address address;
     @OneToMany(
-            mappedBy = "broker",
+            mappedBy = "sender",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Set<Orrder> orderList;
-
-    private String brokerName;
-    private String phoneNr;
-    private BrokerRating brokerRating;
 
     public void addOrder(Orrder order) {
         if(this.orderList == null){
             orderList = new HashSet<>();
         }
         orderList.add(order);
-        order.setBroker(this);
+        order.setSender(this);
     }
     public void removeOrder(Orrder order) {
         orderList.remove(order);
-        order.setBroker(null);//relly on orphan removal
+        order.setSender(null);//relly on orphan removal
     }
 
-    public enum BrokerRating {
-        A, B, C, D
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sender sender = (Sender) o;
+        return Objects.equals(ID, sender.ID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 }

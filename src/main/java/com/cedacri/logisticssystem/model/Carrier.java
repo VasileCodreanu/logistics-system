@@ -14,35 +14,28 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Broker {
+public class Carrier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+    private String name;
     @Embedded
     private Address address;
     @OneToMany(
-            mappedBy = "broker",
+            mappedBy = "carrier",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Set<Orrder> orderList;
-
-    private String brokerName;
-    private String phoneNr;
-    private BrokerRating brokerRating;
 
     public void addOrder(Orrder order) {
         if(this.orderList == null){
             orderList = new HashSet<>();
         }
         orderList.add(order);
-        order.setBroker(this);
+        order.setCarrier(this);
     }
     public void removeOrder(Orrder order) {
         orderList.remove(order);
-        order.setBroker(null);//relly on orphan removal
-    }
-
-    public enum BrokerRating {
-        A, B, C, D
+        order.setCarrier(null);//relly on orphan removal
     }
 }

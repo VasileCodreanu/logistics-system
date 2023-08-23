@@ -1,17 +1,12 @@
 package com.cedacri.logisticssystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Embeddable
 @NoArgsConstructor
-@AllArgsConstructor
 public class Address {
-    private Long ID;
     private String city;
     private String address;
-    private String directions;
 }
