@@ -18,8 +18,7 @@ public class Broker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-    @Embedded
-    private Address address;
+
     @OneToMany(
             mappedBy = "broker",
             cascade = CascadeType.ALL,
@@ -28,7 +27,10 @@ public class Broker {
 
     private String brokerName;
     private String phoneNr;
+//    @Enumerated(EnumType.STRING)
     private BrokerRating brokerRating;
+    @Embedded
+    private Address address;
 
     public void addOrder(Orrder order) {
         if(this.orderList == null){

@@ -28,10 +28,11 @@ public class Vehicle {
 
     private String vehicleNr;
     private String currentCityLocation;
+//    @Enumerated(EnumType.STRING)
     private VehicleStatus currentStatus;
 
     public enum VehicleStatus {
-        FREE, BUSY, NOT_WORKING;
+        FREE, BUSY, INACTIVE;
     }
 
     public void addOrder(Orrder order) {

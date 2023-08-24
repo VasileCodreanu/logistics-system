@@ -8,14 +8,12 @@ import java.util.Set;
 
 @Entity
 public class Sender extends Customer{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+
     @OneToMany(
             mappedBy = "sender",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Set<Orrder> orderList;
+    private Set<Orrder> orderList = new HashSet<>();
 
     public void addOrder(Orrder order) {
         if(this.orderList == null){
@@ -29,16 +27,4 @@ public class Sender extends Customer{
         order.setSender(null);//relly on orphan removal
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sender sender = (Sender) o;
-        return Objects.equals(ID, sender.ID);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ID);
-    }
 }
