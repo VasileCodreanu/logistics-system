@@ -1,9 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
-import com.cedacri.logisticssystem.model.Carrier;
-import com.cedacri.logisticssystem.model.Customer;
 import com.cedacri.logisticssystem.model.Vehicle;
-import com.cedacri.logisticssystem.repository.CarrierRepository;
 import com.cedacri.logisticssystem.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,15 +32,10 @@ public class VehicleService {
 
     public Vehicle update(Vehicle entity) {
         Vehicle foundVehicle = this.getById(entity.getID());
-        return repository.save(foundVehicle);
-    }
-
-    public void delete(Vehicle entity) {
-        repository.delete(entity);
+        return repository.save(entity);
     }
 
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
-
 }

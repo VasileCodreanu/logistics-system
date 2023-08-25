@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -34,7 +33,7 @@ public class CustomerService {
 
     public Customer update(Customer entity) {
         Customer foundCustomer = this.getById(entity.getID());
-        return repository.save(foundCustomer);
+        return repository.save(entity);
     }
 
     public void delete(Customer entity) {

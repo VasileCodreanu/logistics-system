@@ -35,7 +35,7 @@ public class CarrierService {
 
     public Carrier update(Carrier entity) {
         Carrier foundCarrier = this.getById(entity.getID());
-        return repository.save(foundCarrier);
+        return repository.save(entity);
     }
 
     public void delete(Carrier entity) {

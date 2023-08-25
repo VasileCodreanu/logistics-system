@@ -20,6 +20,10 @@ public class Orrder {
     private Long ID;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dispatcher_id", referencedColumnName = "ID")
+    private Dispatcher dispatcher;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     //@MapsId because we want the child table row to share the Primary Key with its parent table row meaning that the Primary Key is also a Foreign Key back to the parent table record.
     @JoinColumn(name = "carrier_id", referencedColumnName = "ID")
     private Carrier carrier;

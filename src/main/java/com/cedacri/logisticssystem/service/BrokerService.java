@@ -1,8 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
 import com.cedacri.logisticssystem.model.Broker;
-import com.cedacri.logisticssystem.model.Carrier;
-import com.cedacri.logisticssystem.model.Customer;
 import com.cedacri.logisticssystem.repository.BrokerRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +33,7 @@ public class BrokerService {
 
     public Broker update(Broker entity) {
         Broker foundBroker = this.getById(entity.getID());
-        return repository.save(foundBroker);
+        return repository.save(entity);
     }
 
     public void delete(Broker entity) {

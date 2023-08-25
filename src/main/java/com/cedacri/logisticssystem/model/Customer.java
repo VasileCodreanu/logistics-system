@@ -25,6 +25,8 @@ public class Customer {
     private String directions;
     private String proneNr;
     private String email;
+    @Embedded
+    private Address address;
 
     @OneToMany(
             mappedBy = "sender",
@@ -37,9 +39,6 @@ public class Customer {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     Set<Orrder> receiverOrders  = new HashSet<>();;
-
-    @Embedded
-    private Address address;
 
     @Override
     public boolean equals(Object o) {
