@@ -1,6 +1,7 @@
 package com.cedacri.logisticssystem.service;
 
 import com.cedacri.logisticssystem.model.Carrier;
+import com.cedacri.logisticssystem.model.Customer;
 import com.cedacri.logisticssystem.model.Vehicle;
 import com.cedacri.logisticssystem.repository.CarrierRepository;
 import com.cedacri.logisticssystem.repository.VehicleRepository;
@@ -29,15 +30,16 @@ public class VehicleService {
         return carrierList;
     }
     public Vehicle getById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Carrier with ID="+id));
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Vehicle with ID="+id));
     }
 
-    public Vehicle update(Vehicle dto) {
-        return repository.save(dto);
+    public Vehicle update(Vehicle entity) {
+        Vehicle foundVehicle = this.getById(entity.getID());
+        return repository.save(foundVehicle);
     }
 
-    public void delete(Vehicle dto) {
-        repository.delete(dto);
+    public void delete(Vehicle entity) {
+        repository.delete(entity);
     }
 
     public void deleteById(Long id) {

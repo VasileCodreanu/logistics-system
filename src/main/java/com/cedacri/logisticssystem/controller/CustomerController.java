@@ -1,36 +1,36 @@
 package com.cedacri.logisticssystem.controller;
 
 
-import com.cedacri.logisticssystem.model.Receiver;
-import com.cedacri.logisticssystem.service.ReceiverService;
+import com.cedacri.logisticssystem.model.Customer;
+import com.cedacri.logisticssystem.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/receiver")
-public class ReceiverController {
-    private final ReceiverService service;
+@RequestMapping("/v1/customer")
+public class CustomerController {
+    private final CustomerService service;
 
-    public ReceiverController(ReceiverService service) {
+    public CustomerController(CustomerService service) {
         this.service = service;
     }
 
     @PostMapping
-    public Receiver save(@RequestBody Receiver dto){
+    public Customer save(@RequestBody Customer dto){
         return service.save(dto);
     }
     @GetMapping
-    public List<Receiver> getAll(){
+    public List<Customer> getAll(){
         return service.getAll();
     }
     @GetMapping("/{Id}")
-    public Receiver getById(@PathVariable Long Id){
+    public Customer getById(@PathVariable Long Id){
         return service.getById(Id);
     }
 
     @PutMapping
-    public Receiver update(@RequestBody Receiver dto){
+    public Customer update(@RequestBody Customer dto){
         return service.update(dto);
     }
 

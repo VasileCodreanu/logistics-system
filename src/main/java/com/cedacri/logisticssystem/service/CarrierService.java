@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
+import com.cedacri.logisticssystem.model.Broker;
 import com.cedacri.logisticssystem.model.Carrier;
 import com.cedacri.logisticssystem.repository.CarrierRepository;
 import org.springframework.stereotype.Service;
@@ -32,17 +33,17 @@ public class CarrierService {
         return repository.findById(id).orElseThrow(()-> new RuntimeException("No Carrier with ID="+id));
     }
 
-    public Carrier update(Carrier dto) {
-        return repository.save(dto);
+    public Carrier update(Carrier entity) {
+        Carrier foundCarrier = this.getById(entity.getID());
+        return repository.save(foundCarrier);
     }
 
-    public void delete(Carrier dto) {
-        repository.delete(dto);
+    public void delete(Carrier entity) {
+        repository.delete(entity);
     }
 
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
-
 
 }

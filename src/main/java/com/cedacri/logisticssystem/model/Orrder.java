@@ -34,11 +34,11 @@ public class Orrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", referencedColumnName = "ID")
-    private Sender sender;
+    private Customer sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id", referencedColumnName = "ID")
-    private Receiver receiver;
+    private Customer receiver;
 
     private double amountToBePaid;
     private String commodity;
