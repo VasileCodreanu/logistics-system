@@ -1,4 +1,8 @@
 
+
+## File with Credentials
+env.properties
+
 ##############################
 ## Visual Studio Code
 ##############################
@@ -58,7 +62,7 @@ gradle-app.setting
 .idea/
 .idea_modules/
 *.iml
-*.xml
+#*.xml
 *.ipr
 *.iws
 *.ids
@@ -99,18 +103,14 @@ libraries
 ##############################
 ## Eclipse
 ##############################
-.settings/
 tmp/
 .metadata
-.classpath
-.project
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
 .loadpath
-.factorypath
 
 ##############################
 ## NetBeans
