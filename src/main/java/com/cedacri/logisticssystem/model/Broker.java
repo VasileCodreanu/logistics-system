@@ -1,5 +1,7 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,11 +21,13 @@ public class Broker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "broker",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Set<Orrder> orderList;
+    @JsonIgnoreProperties("broker")
+    private Set<Order> orderList;
 
     private String brokerName;
     private String phoneNr;
@@ -32,14 +36,14 @@ public class Broker {
     @Embedded
     private Address address;
 
-    public void addOrder(Orrder order) {
+    public void addOrder(Order order) {
         if(this.orderList == null){
             orderList = new HashSet<>();
         }
         orderList.add(order);
         order.setBroker(this);
     }
-    public void removeOrder(Orrder order) {
+    public void removeOrder(Order order) {
         orderList.remove(order);
         order.setBroker(null);//relly on orphan removal
     }

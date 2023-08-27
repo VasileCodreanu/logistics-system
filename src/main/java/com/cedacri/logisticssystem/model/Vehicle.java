@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,8 @@ public class Vehicle {
             mappedBy = "vehicle",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Set<Orrder> orderList;
+    @JsonIgnore
+    private Set<Order> orderList;
 
     private String vehicleNr;
     private String currentCityLocation;
@@ -35,14 +37,14 @@ public class Vehicle {
         FREE, BUSY, INACTIVE;
     }
 
-    public void addOrder(Orrder order) {
+    public void addOrder(Order order) {
         if(this.orderList == null){
             orderList = new HashSet<>();
         }
         this.orderList.add(order);
         order.setVehicle(this);
     }
-    public void removeOrder(Orrder order) {
+    public void removeOrder(Order order) {
         orderList.remove(order);
         order.setVehicle(null);//relly on orphan removal
     }

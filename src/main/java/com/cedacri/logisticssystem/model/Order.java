@@ -1,7 +1,11 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +18,9 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orrder {
+@Builder
+@Table(name = "order_table" )
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
@@ -30,6 +36,7 @@ public class Orrder {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "broker_id", referencedColumnName = "ID")
+    @JsonIgnoreProperties("orderList")//will prevent fields from being serialized/deserialized.
     private Broker broker;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,6 +57,22 @@ public class Orrder {
     private LocalDate orderDeliveredOn;
     private OrderStatus orderStatus;
 
+    public Order(Dispatcher dispatcher, Carrier carrier, Broker broker, Vehicle vehicle,
+        Customer sender, Customer receiver, double amountToBePaid, String commodity,
+        LocalDate orderPlacedOn, LocalDate orderDeliveredOn, OrderStatus orderStatus) {
+        this.dispatcher = dispatcher;
+        this.carrier = carrier;
+        this.broker = broker;
+        this.vehicle = vehicle;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.amountToBePaid = amountToBePaid;
+        this.commodity = commodity;
+        this.orderPlacedOn = orderPlacedOn;
+        this.orderDeliveredOn = orderDeliveredOn;
+        this.orderStatus = orderStatus;
+    }
+
     public enum OrderStatus {
         DELIVERED, PROCESSING, CANCELLED;
     }
@@ -58,7 +81,7 @@ public class Orrder {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orrder order = (Orrder) o;
+        Order order = (Order) o;
         return Double.compare(order.amountToBePaid, amountToBePaid) == 0 && Objects.equals(ID, order.ID) && Objects.equals(commodity, order.commodity) && Objects.equals(orderPlacedOn, order.orderPlacedOn) && Objects.equals(orderDeliveredOn, order.orderDeliveredOn) && orderStatus == order.orderStatus;
     }
 

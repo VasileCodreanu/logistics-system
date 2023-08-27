@@ -3,6 +3,7 @@ package com.cedacri.logisticssystem.controller;
 import com.cedacri.logisticssystem.model.Broker;
 import com.cedacri.logisticssystem.model.Carrier;
 import com.cedacri.logisticssystem.service.BrokerService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,21 +19,25 @@ public class BrokerController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Broker save(@RequestBody Broker dto){
         return service.save(dto);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Broker> getAll(){
         return service.getAll();
     }
 
     @GetMapping("/{Id}")
+    @ResponseStatus(HttpStatus.OK)
     public Broker getById(@PathVariable Long Id){
         return service.getById(Id);
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public Broker update(@RequestBody Broker dto){
         return service.update(dto);
     }
@@ -42,6 +47,16 @@ public class BrokerController {
     public void delete(@RequestBody Broker dto){
         service.delete(dto);
     }
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> deleteCategoryById(@PathVariable Long id){
+//        dtoService.deleteCategoryById(id);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Delete Category","Category with id="+id+" deleted!");
+//
+//        return new ResponseEntity<> (headers, HttpStatus.ACCEPTED);
+//
+//    }
 
     @DeleteMapping("/{Id}")
     public void deleteById(@PathVariable Long Id){

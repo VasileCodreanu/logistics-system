@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,5 +31,6 @@ public class Dispatcher {
             mappedBy = "dispatcher",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    Set<Orrder> dispatcherOrders = new HashSet<>();;
+    @JsonIgnore
+    Set<Order> dispatcherOrders = new HashSet<>();;
 }

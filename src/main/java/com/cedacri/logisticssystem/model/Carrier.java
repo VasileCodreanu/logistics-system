@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,20 +22,23 @@ public class Carrier {
     private String name;
     @Embedded
     private Address address;
+
+
     @OneToMany(
             mappedBy = "carrier",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private Set<Orrder> orderList;
+    @JsonIgnore
+    private Set<Order> orderList;
 
-    public void addOrder(Orrder order) {
+    public void addOrder(Order order) {
         if(this.orderList == null){
             orderList = new HashSet<>();
         }
         orderList.add(order);
         order.setCarrier(this);
     }
-    public void removeOrder(Orrder order) {
+    public void removeOrder(Order order) {
         orderList.remove(order);
         order.setCarrier(null);//relly on orphan removal
     }

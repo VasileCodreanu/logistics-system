@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,13 +33,15 @@ public class Customer {
             mappedBy = "sender",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    Set<Orrder> senderOrders = new HashSet<>();
+    @JsonIgnore
+    Set<Order> senderOrders = new HashSet<>();
 
     @OneToMany(
             mappedBy = "receiver",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    Set<Orrder> receiverOrders  = new HashSet<>();;
+    @JsonIgnore
+    Set<Order> receiverOrders  = new HashSet<>();;
 
     @Override
     public boolean equals(Object o) {
