@@ -33,7 +33,8 @@ public class BrokerService {
     }
 
     public Broker update(Broker entity) {
-        this.getById(entity.getID());
+        Broker entityById = this.getById(entity.getID());
+        entity.getOrderList().addAll(entityById.getOrderList());
         return repository.save(entity);
     }
 

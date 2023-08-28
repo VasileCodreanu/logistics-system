@@ -32,5 +32,5 @@ public class Dispatcher {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnore
-    Set<Order> dispatcherOrders = new HashSet<>();;
+    Set<Order> orderList = new HashSet<>();;
 }

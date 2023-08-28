@@ -26,7 +26,7 @@ public class Vehicle {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnore
-    private Set<Order> orderList;
+    private Set<Order> orderList = new HashSet<>();;
 
     private String vehicleNr;
     private String currentCityLocation;
@@ -38,9 +38,6 @@ public class Vehicle {
     }
 
     public void addOrder(Order order) {
-        if(this.orderList == null){
-            orderList = new HashSet<>();
-        }
         this.orderList.add(order);
         order.setVehicle(this);
     }

@@ -27,7 +27,7 @@ public class Broker {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnoreProperties("broker")
-    private Set<Order> orderList;
+    private Set<Order> orderList = new HashSet<>();;
 
     private String brokerName;
     private String phoneNr;
@@ -37,9 +37,6 @@ public class Broker {
     private Address address;
 
     public void addOrder(Order order) {
-        if(this.orderList == null){
-            orderList = new HashSet<>();
-        }
         orderList.add(order);
         order.setBroker(this);
     }

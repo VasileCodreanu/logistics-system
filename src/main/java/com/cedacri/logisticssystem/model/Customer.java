@@ -41,7 +41,7 @@ public class Customer {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnore
-    Set<Order> receiverOrders  = new HashSet<>();;
+    Set<Order> receiverOrders = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

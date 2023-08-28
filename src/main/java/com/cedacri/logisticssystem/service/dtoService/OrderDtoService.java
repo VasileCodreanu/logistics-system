@@ -72,7 +72,6 @@ public class OrderDtoService {
   }
 
   public OrderDtoResponse update(OrderDtoResponse dto) {
-
     Order mappedOrder = mapOrderDtoResponseToOrder(dto);
     Order order = manager.update(mappedOrder);
     return this.mapOrderToOrderDtoResponse(order);

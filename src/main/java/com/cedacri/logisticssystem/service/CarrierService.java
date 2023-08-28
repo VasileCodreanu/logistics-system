@@ -1,6 +1,7 @@
 package com.cedacri.logisticssystem.service;
 
 import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
+import com.cedacri.logisticssystem.model.Broker;
 import com.cedacri.logisticssystem.model.Carrier;
 import com.cedacri.logisticssystem.repository.CarrierRepository;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class CarrierService {
     }
 
     public Carrier update(Carrier entity) {
-        this.getById(entity.getID());
+        Carrier entityById = this.getById(entity.getID());
+        entity.getOrderList().addAll(entityById.getOrderList());
         return repository.save(entity);
     }
 

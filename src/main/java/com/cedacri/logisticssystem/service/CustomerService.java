@@ -1,6 +1,7 @@
 package com.cedacri.logisticssystem.service;
 
 import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
+import com.cedacri.logisticssystem.model.Broker;
 import com.cedacri.logisticssystem.model.Customer;
 import com.cedacri.logisticssystem.repository.ReceiverRepository;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,9 @@ public class CustomerService {
     }
 
     public Customer update(Customer entity) {
-        this.getById(entity.getID());
+        Customer entityById = this.getById(entity.getID());
+        entity.getReceiverOrders().addAll(entityById.getReceiverOrders());
+        entity.getSenderOrders().addAll(entityById.getSenderOrders());
         return repository.save(entity);
     }
 

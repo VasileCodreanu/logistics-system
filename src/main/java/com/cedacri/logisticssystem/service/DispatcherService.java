@@ -1,6 +1,7 @@
 package com.cedacri.logisticssystem.service;
 
 import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
+import com.cedacri.logisticssystem.model.Carrier;
 import com.cedacri.logisticssystem.model.Dispatcher;
 import com.cedacri.logisticssystem.repository.DispatcherRepository;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class DispatcherService {
     }
 
     public Dispatcher update(Dispatcher entity) {
-        this.getById(entity.getID());
+        Dispatcher entityById = this.getById(entity.getID());
+        entity.getOrderList().addAll(entityById.getOrderList());
         return repository.save(entity);
     }
 

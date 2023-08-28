@@ -29,12 +29,9 @@ public class Carrier {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnore
-    private Set<Order> orderList;
+    private Set<Order> orderList = new HashSet<>();
 
     public void addOrder(Order order) {
-        if(this.orderList == null){
-            orderList = new HashSet<>();
-        }
         orderList.add(order);
         order.setCarrier(this);
     }
