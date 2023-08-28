@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
+import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
 import com.cedacri.logisticssystem.model.Customer;
 import com.cedacri.logisticssystem.repository.ReceiverRepository;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,12 @@ public class CustomerService {
     }
 
     public Customer getById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Customer with ID="+id));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No Customer with id=", id));
     }
 
     public Customer update(Customer entity) {
-        Customer foundCustomer = this.getById(entity.getID());
+        this.getById(entity.getID());
         return repository.save(entity);
-    }
-
-    public void delete(Customer entity) {
-        repository.delete(entity);
     }
 
     public void deleteById(Long id) {

@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
+import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
 import com.cedacri.logisticssystem.model.Dispatcher;
 import com.cedacri.logisticssystem.repository.DispatcherRepository;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,11 @@ public class DispatcherService {
         return carrierList;
     }
     public Dispatcher getById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Dispatcher with ID="+id));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No Dispatcher with id=", id));
     }
 
     public Dispatcher update(Dispatcher entity) {
-        Dispatcher foundDispatcher = this.getById(entity.getID());
+        this.getById(entity.getID());
         return repository.save(entity);
     }
 

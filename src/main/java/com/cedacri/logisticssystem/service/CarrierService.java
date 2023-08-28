@@ -1,13 +1,12 @@
 package com.cedacri.logisticssystem.service;
 
-import com.cedacri.logisticssystem.model.Broker;
+import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
 import com.cedacri.logisticssystem.model.Carrier;
 import com.cedacri.logisticssystem.repository.CarrierRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarrierService {
@@ -30,11 +29,11 @@ public class CarrierService {
         return carrierList;
     }
     public Carrier getById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Carrier with ID="+id));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No Carrier with id=", id));
     }
 
     public Carrier update(Carrier entity) {
-        Carrier foundCarrier = this.getById(entity.getID());
+        this.getById(entity.getID());
         return repository.save(entity);
     }
 

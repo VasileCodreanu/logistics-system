@@ -1,5 +1,6 @@
 package com.cedacri.logisticssystem.service;
 
+import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
 import com.cedacri.logisticssystem.model.Broker;
 import com.cedacri.logisticssystem.repository.BrokerRepository;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,11 @@ public class BrokerService {
         return brokerList;
     }
     public Broker getById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("No Broker with ID="+id));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No Broker with id=", id));
     }
 
     public Broker update(Broker entity) {
-        Broker foundBroker = this.getById(entity.getID());
+        this.getById(entity.getID());
         return repository.save(entity);
     }
 

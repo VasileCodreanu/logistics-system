@@ -1,9 +1,9 @@
 package com.cedacri.logisticssystem.service.managerService;
 
-import com.cedacri.logisticssystem.model.Broker;
+import com.cedacri.logisticssystem.exceptions.customExceptions.EntityNotFoundException;
 import com.cedacri.logisticssystem.model.Order;
 import com.cedacri.logisticssystem.repository.OrderRepository;
-import java.util.ArrayList;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,11 +32,11 @@ public class OrderManagerService {
   }
 
   public Order getById(Long id) {
-    return repository.findById(id).orElseThrow(() -> new RuntimeException("No Order with id="+ id));
+    return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("No Order with id=", id));
   }
 
   public Order update(Order entity) {
-    Order orderToBeUpdated = this.getById(entity.getID());
+    this.getById(entity.getID());
     return repository.save(entity);
   }
 
