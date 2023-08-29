@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController//=@Controller + @ResponseBody(witch works with @ResponseStatus => no need for ResponseEntity )
 @RequestMapping("/v1/broker")
 @RequiredArgsConstructor
 public class BrokerController {
